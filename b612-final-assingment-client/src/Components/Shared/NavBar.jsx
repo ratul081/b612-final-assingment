@@ -99,7 +99,7 @@ const NavBar = () => {
             </button>
           </div>
           <div className="flex mx-4">
-            <Link to="/white-list">
+            <Link to="/whitelist">
               <AiOutlineHeart className=" w-6 h-6" />
             </Link>
             <Link to="/orders">
