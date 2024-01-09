@@ -1,12 +1,13 @@
 import { createBrowserRouter } from "react-router-dom";
 import Main from "../Layouts/Main";
+import About from "../Pages/About/About";
+import CheckOut from "../Pages/CheckOut/CheckOut";
+import Contacts from "../Pages/Contact/Contacts";
+import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import Home from "../Pages/Home/Home";
-import Register from "../Pages/Register/Register";
 import LogIn from "../Pages/Login/LogIn";
 import Orders from "../Pages/Orders/Orders";
-import ErrorPage from "../Pages/ErrorPage/ErrorPage";
-import Contacts from "../Pages/Contact/Contacts";
-import About from "../Pages/About/About";
+import Register from "../Pages/Register/Register";
 import Whitelist from "../Pages/Whitelist/Whitelist";
 
 export const routes = createBrowserRouter([
@@ -21,6 +22,7 @@ export const routes = createBrowserRouter([
       { path: "/sign-up", element: <Register></Register> },
       { path: "/contact", element: <Contacts></Contacts> },
       { path: "/about", element: <About></About> },
+      { path: "/checkout", element: <CheckOut></CheckOut> },
       { path: "*", element: <ErrorPage></ErrorPage> },
     ],
   },
