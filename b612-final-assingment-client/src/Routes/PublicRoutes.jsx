@@ -9,6 +9,8 @@ import LogIn from "../Pages/Login/LogIn";
 import Orders from "../Pages/Orders/Orders";
 import Register from "../Pages/Register/Register";
 import Whitelist from "../Pages/Whitelist/Whitelist";
+import MyAccount from "../Pages/MyAccount/MyAccount";
+import Manage from "../Pages/MyAccount/Manage";
 
 export const routes = createBrowserRouter([
   {
@@ -23,6 +25,11 @@ export const routes = createBrowserRouter([
       { path: "/contact", element: <Contacts></Contacts> },
       { path: "/about", element: <About></About> },
       { path: "/checkout", element: <CheckOut></CheckOut> },
+      {
+        path: "/my-account",
+        element: <MyAccount></MyAccount>,
+        children: [{ path: "/my-account", element: <Manage></Manage> }],
+      },
       { path: "*", element: <ErrorPage></ErrorPage> },
     ],
   },
