@@ -26,7 +26,7 @@ const NavBar = () => {
   const profileMenu = (
     <>
       <li>
-        <Link to="/manage-account">Manage My Account</Link>
+        <Link to="/my-account">Manage My Account</Link>
       </li>
       <li>
         <Link to="/orders">My Order</Link>

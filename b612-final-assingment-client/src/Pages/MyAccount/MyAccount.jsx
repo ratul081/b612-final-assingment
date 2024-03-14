@@ -6,7 +6,7 @@ import { Outlet } from "react-router-dom";
 const MyAccount = () => {
   return (
     <>
-      <div className="drawer lg:drawer-open">
+      <div className="drawer lg:drawer-open py-14">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content">
           {/* Page content here */}
@@ -22,7 +22,7 @@ const MyAccount = () => {
             htmlFor="my-drawer-2"
             aria-label="close sidebar"
             className="drawer-overlay"></label>
-          <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
+          <ul className="menu p-4 w-80 min-h-full text-base-content">
             {/* Sidebar content here */}
             <Sidebar></Sidebar>
           </ul>
