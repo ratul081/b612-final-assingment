@@ -11,6 +11,7 @@ import Register from "../Pages/Register/Register";
 import Whitelist from "../Pages/Whitelist/Whitelist";
 import MyAccount from "../Pages/MyAccount/MyAccount";
 import Manage from "../Pages/MyAccount/Manage";
+import Product from "../Pages/Product/Product";
 
 export const routes = createBrowserRouter([
   {
@@ -25,6 +26,7 @@ export const routes = createBrowserRouter([
       { path: "/contact", element: <Contacts></Contacts> },
       { path: "/about", element: <About></About> },
       { path: "/checkout", element: <CheckOut></CheckOut> },
+      { path: "/product", element: <Product></Product> },
       {
         path: "/my-account",
         element: <MyAccount></MyAccount>,
