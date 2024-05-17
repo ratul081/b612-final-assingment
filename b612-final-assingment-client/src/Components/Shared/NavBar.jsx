@@ -6,7 +6,7 @@ import useAuth from "../../hooks/useAuth";
 
 const NavBar = () => {
   const { user, logOut } = useAuth();
-  console.log("🚀 ~ file: NavBar.jsx:9 ~ NavBar ~ user:", user);
+  // console.log("🚀 ~ file: NavBar.jsx:9 ~ NavBar ~ user:", user);
   const handleLogOut = () => {
     logOut();
   };
