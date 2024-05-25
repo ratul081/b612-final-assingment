@@ -183,21 +183,21 @@ async function run() {
     //get booking items by id
     app.get("/booking/:id", async (req, res) => {
       const id = req.params.id;
-      const query = { _id: ObjectId(id) };
+      const query = { _id: new ObjectId(id) };
       const result = await bookingCollection.findOne(query);
       res.send(result);
     });
 
     //get users by get method
     app.get("/users", async (req, res) => {
-      const user = req.body;
+      // const user = req.body;
       const query = {};
       const filter = await usersCollection.find(query).toArray();
       res.send(filter);
     });
 
     //get products for advertising in home
-    app.get("/product", async (req, res) => {
+    app.get("/products", async (req, res) => {
       const query = {};
       const result = await productsCollection.find(query).toArray();
       res.send(result);
@@ -206,7 +206,7 @@ async function run() {
     //delete method for delete user from allusers
     app.delete("/users/:id", async (req, res) => {
       const id = req.params.id;
-      const filter = { _id: ObjectId(id) };
+      const filter = { _id: new ObjectId(id) };
       const result = await usersCollection.deleteOne(filter);
       res.send(result);
     });
@@ -214,7 +214,7 @@ async function run() {
     //delete order from my order
     app.delete("/booking/:id", async (req, res) => {
       const id = req.params.id;
-      const filter = { _id: ObjectId(id) };
+      const filter = { _id: new ObjectId(id) };
       const result = await bookingCollection.deleteOne(filter);
       res.send(result);
     });
@@ -222,7 +222,7 @@ async function run() {
     //delete method single person product
     app.delete("/product/:id", async (req, res) => {
       const id = req.params.id;
-      const filter = { _id: ObjectId(id) };
+      const filter = { _id: new ObjectId(id) };
       const result = await productsCollection.deleteOne(filter);
       res.send(result);
     });
@@ -246,7 +246,7 @@ async function run() {
       const payment = req.body;
       const result = await paymentsCollection.insertOne(payment);
       const id = payment.bookingId;
-      const filter = { _id: ObjectId(id) };
+      const filter = { _id: new ObjectId(id) };
       const updateDoc = {
         $set: {
           paid: true,
@@ -260,7 +260,7 @@ async function run() {
     //put method for upsert and make admin
     app.put("/users/admin/:id", verifyJWT, verifyAdmin, async (req, res) => {
       const id = req.params.id;
-      const filter = { _id: ObjectId(id) };
+      const filter = { _id: new ObjectId(id) };
       const options = { upsert: true };
       const updateDoc = {
         $set: {
@@ -278,7 +278,7 @@ async function run() {
     //put method for verified seller
     app.put("/users/verify/:id", async (req, res) => {
       const id = req.params.id;
-      const filter = { _id: ObjectId(id) };
+      const filter = { _id: new ObjectId(id) };
       const options = { upsert: true };
       const updateDoc = {
         $set: {
@@ -296,7 +296,7 @@ async function run() {
     //put method for ad items true
     app.put("/product/add/:id", async (req, res) => {
       const id = req.params.id;
-      const filter = { _id: ObjectId(id) };
+      const filter = { _id: new ObjectId(id) };
       const options = { upsert: true };
       const updateDoc = {
         $set: {

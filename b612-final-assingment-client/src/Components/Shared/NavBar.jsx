@@ -21,6 +21,9 @@ const NavBar = () => {
       <li>
         <Link to="/about">About</Link>
       </li>
+      <li>
+        <Link to="/products">Shop</Link>
+      </li>
     </>
   );
   const profileMenu = (

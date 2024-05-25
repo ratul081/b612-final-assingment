@@ -12,6 +12,7 @@ import Whitelist from "../Pages/Whitelist/Whitelist";
 import MyAccount from "../Pages/MyAccount/MyAccount";
 import Manage from "../Pages/MyAccount/Manage";
 import Product from "../Pages/Product/Product";
+import Products from "../Pages/Products/Products";
 
 export const routes = createBrowserRouter([
   {
@@ -25,6 +26,7 @@ export const routes = createBrowserRouter([
       { path: "/sign-up", element: <Register></Register> },
       { path: "/contact", element: <Contacts></Contacts> },
       { path: "/about", element: <About></About> },
+      { path: "/products", element: <Products></Products> },
       { path: "/checkout", element: <CheckOut></CheckOut> },
       { path: "/product", element: <Product></Product> },
       {

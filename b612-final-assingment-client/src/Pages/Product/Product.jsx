@@ -1,19 +1,18 @@
 import React from "react";
 import ProductImage from "./ProductImage";
 import { useQuery } from "react-query";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const Product = () => {
-  const {data:data=[]}=useQuery({
-    queryKey:[],
-    queryFn: async ()=>{
-      const res =  await fetch(`${import.meta.env.API_URL}/data`)
-    }
-  })
-  const productDetails = async () =>
-    await fetch(`${import.meta.env.API_URL}/data`)
-      .then((res) => res.json())
-      .catch((err) => console.log(err));
-  console.log(productDetails);
+  const [axiosSecure] = useAxiosSecure();
+  const { data: products = [], refetch } = useQuery({
+    queryKey: ["products"],
+    queryFn: () =>
+      axiosSecure.get("/products").then((res) => {
+        return res.data;
+      }),
+  });
+  console.log(products);
   return (
     <div className="mt-10">
       <ProductImage></ProductImage>
