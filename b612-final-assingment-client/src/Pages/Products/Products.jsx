@@ -17,7 +17,14 @@ const Products = () => {
   return (
     <div className="mt-12">
       <p className="text-3xl my-4">Here some devices you can buy</p>
-      <ProductsDisplay products={products}></ProductsDisplay>
+      <div className="grid grid-cols-5">
+        <div>
+          <Categories products={products}></Categories>
+        </div>
+        <div className="col-span-4">
+          <ProductsDisplay products={products}></ProductsDisplay>
+        </div>
+      </div>
     </div>
   );
 };

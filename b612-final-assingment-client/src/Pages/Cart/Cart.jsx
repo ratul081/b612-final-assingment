@@ -1,8 +1,8 @@
 import React from "react";
-import Breadcrumbs from "../../Components/Shared/Breadcrumbs";
 import { Link } from "react-router-dom";
+import { AiOutlinePlus } from "react-icons/ai";
 
-const Orders = () => {
+const Cart = () => {
   return (
     <div>
       <section>
@@ -40,20 +40,9 @@ const Orders = () => {
                   </div>
 
                   <div className="flex flex-1 items-center justify-end gap-2">
-                    <form>
-                      <label htmlFor="Line1Qty" className="sr-only">
-                        {" "}
-                        Quantity{" "}
-                      </label>
-
-                      <input
-                        type="number"
-                        min="1"
-                        value="1"
-                        id="Line1Qty"
-                        className="h-8 w-12 rounded border-gray-200 bg-gray-50 p-0 text-center text-xs text-gray-600 [-moz-appearance:_textfield] focus:outline-none [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none"
-                      />
-                    </form>
+                    <button className="btn mx-4">
+                      <AiOutlinePlus />
+                    </button>
 
                     <button className="text-gray-600 transition hover:text-red-600">
                       <span className="sr-only">Remove item</span>
@@ -138,4 +127,4 @@ const Orders = () => {
   );
 };
 
-export default Orders;
+export default Cart;

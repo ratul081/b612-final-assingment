@@ -29,16 +29,16 @@ const NavBar = () => {
   const profileMenu = (
     <>
       <li>
+        <Link to="/dashboard">Dashboard</Link>
+      </li>
+      <li>
         <Link to="/my-account">Manage My Account</Link>
       </li>
       <li>
-        <Link to="/orders">My Order</Link>
+        <Link to="/orders">Orders</Link>
       </li>
       <li>
-        <Link to="/cancellations">My Cancellations</Link>
-      </li>
-      <li>
-        <Link to="/reviews">My Reviews</Link>
+        <Link to="/reviews">Reviews</Link>
       </li>
       <li>
         <button onClick={handleLogOut}>Logout</button>

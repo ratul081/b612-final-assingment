@@ -5,7 +5,7 @@ const Footer = () => {
     <div>
       <footer className="footer p-10 bg-base-200 text-base">
         <nav>
-          <header className="footer-title ">Services</header>
+          <header className="footer-title">Services</header>
           <a className="link link-hover">Branding</a>
           <a className="link link-hover">Design</a>
           <a className="link link-hover">Marketing</a>

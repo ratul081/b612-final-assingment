@@ -2,11 +2,14 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import Swal from "sweetalert2";
 
 const Register = () => {
   const { createUser, googleSignIn, updateUserProfile } = useAuth();
   const [signUpError, setSignUPError] = useState("");
   // const [createdUserEmail, setCreatedUserEmail] = useState("");
+  const [axiosSecure] = useAxiosSecure();
   const {
     register,
     handleSubmit,
@@ -25,15 +28,23 @@ const Register = () => {
         const user = result.user;
         // console.log(user);
         // toast("User Created Successfully.");
-        // const userInfo = {
-        //   displayName: data.name,
-        // };
-        // console.log(userInfo);
-        // updateUserProfile(userInfo)
-        //   .then(() => {
-        //     saveUser(data.name, data.email);
-        //   })
-        //   .catch((err) => console.log(err));
+        const userInfo = {
+          displayName: data.name,
+        };
+        console.log(userInfo);
+        updateUserProfile(userInfo)
+          .then(() => {
+            saveUser(data.name, data.email);
+            reset();
+            Swal.fire({
+              // position: "top-end",
+              icon: "success",
+              title: "User created Successful",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+          })
+          .catch((err) => console.log(err));
         navigate("/");
       })
       .catch((error) => {
@@ -46,17 +57,16 @@ const Register = () => {
       .then((result) => {
         const user = result.user;
         console.log(user);
+        saveUser(user.name, user.email);
         navigate("/");
       })
       .catch((error) => {});
   };
 
-  // const saveUser = (name, email) => {
-  //   const user = { name, email };
-  //   axios
-  //     .post("https://doctors-portal-server-ratul081.vercel.app/users", user)
-  //     .then((res) => console.log(res.data));
-  // };
+  const saveUser = (name, email) => {
+    const user = { name, email };
+    axiosSecure.post("/users", user).then((res) => console.log(res.data));
+  };
 
   return (
     <section className="bg-white my-4">

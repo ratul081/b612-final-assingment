@@ -53,9 +53,9 @@ function verifyJWT(req, res, next) {
 async function run() {
   try {
     const usersCollection = client.db("resaleProducts").collection("usersData");
-    const bookingCollection = client
+    const cartCollection = client
       .db("resaleProducts")
-      .collection("bookingData");
+      .collection("carts");
     const categoryCollection = client
       .db("resaleProducts")
       .collection("categoryData");
@@ -168,7 +168,7 @@ async function run() {
 
     //get method for booking product
 
-    app.get("/booking", async (req, res) => {
+    app.get("/carts", async (req, res) => {
       const email = req.query.email;
 
       // const decodedEmail = req.decoded.email;
@@ -176,15 +176,15 @@ async function run() {
       //   return res.status(403).send({ message: "forbidden access" });
       // }
       const query = { email };
-      const booking = await bookingCollection.find(query).toArray();
+      const booking = await cartCollection.find(query).toArray();
       res.send(booking);
     });
 
     //get booking items by id
-    app.get("/booking/:id", async (req, res) => {
+    app.get("/carts/:id", async (req, res) => {
       const id = req.params.id;
       const query = { _id: new ObjectId(id) };
-      const result = await bookingCollection.findOne(query);
+      const result = await cartCollection.findOne(query);
       res.send(result);
     });
 
@@ -203,7 +203,7 @@ async function run() {
       res.send(result);
     });
 
-    //delete method for delete user from allusers
+    //delete method for delete user from allUsers
     app.delete("/users/:id", async (req, res) => {
       const id = req.params.id;
       const filter = { _id: new ObjectId(id) };
@@ -212,10 +212,10 @@ async function run() {
     });
 
     //delete order from my order
-    app.delete("/booking/:id", async (req, res) => {
+    app.delete("/carts/:id", async (req, res) => {
       const id = req.params.id;
       const filter = { _id: new ObjectId(id) };
-      const result = await bookingCollection.deleteOne(filter);
+      const result = await cartCollection.deleteOne(filter);
       res.send(result);
     });
 
@@ -253,7 +253,7 @@ async function run() {
           transactionId: payment.transactionId,
         },
       };
-      const updateResult = await bookingCollection.updateOne(filter, updateDoc);
+      const updateResult = await cartCollection.updateOne(filter, updateDoc);
       res.send(result);
     });
 
@@ -312,9 +312,9 @@ async function run() {
     });
 
     //post methods for booking items
-    app.post("/booking", async (req, res) => {
+    app.post("/carts", async (req, res) => {
       const booking = req.body;
-      const result = await bookingCollection.insertOne(booking);
+      const result = await cartCollection.insertOne(booking);
       res.send(result);
     });
   } finally {

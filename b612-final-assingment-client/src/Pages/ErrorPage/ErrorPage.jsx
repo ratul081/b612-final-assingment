@@ -1,6 +1,7 @@
 import React from "react";
-
+import { useNavigate } from "react-router-dom";
 const ErrorPage = () => {
+  const navigate = useNavigate();
   return (
     <>
       <section className="bg-white ">
@@ -15,7 +16,9 @@ const ErrorPage = () => {
               helpful links:
             </p>
             <div className="flex items-center mt-6 gap-x-3">
-              <button className="flex items-center justify-center w-1/2 px-5 py-2 text-sm text-gray-700 transition-colors duration-200 bg-white border rounded-lg gap-x-2 sm:w-auto hover:bg-gray-100">
+              <button
+                onClick={() => navigate(-1)}
+                className="flex items-center justify-center w-1/2 px-5 py-2 text-sm text-gray-700 transition-colors duration-200 bg-white border rounded-lg gap-x-2 sm:w-auto hover:bg-gray-100">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
