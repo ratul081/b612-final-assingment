@@ -1,6 +1,6 @@
 import React from "react";
 
-const OnWhitelist = () => {
+const OnWishlist = () => {
   return (
     <div>
       <div className="flex justify-between">
@@ -58,4 +58,4 @@ const OnWhitelist = () => {
   );
 };
 
-export default OnWhitelist;
+export default OnWishlist;

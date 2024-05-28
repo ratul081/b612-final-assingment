@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
-import { AuthContext } from "../../Contexts/AuthProvider";
-import useAdmin from "../../hooks/useAdmin";
-import useSeller from "../../hooks/useSeller";
+import { AuthContext } from "../../../Contexts/AuthProvider";
+import useAdmin from "../../../hooks/useAdmin";
+import useSeller from "../../../hooks/useSeller";
 import MyAccount from "./MyAccount/MyAccount";
 
 const Dashboard = () => {
