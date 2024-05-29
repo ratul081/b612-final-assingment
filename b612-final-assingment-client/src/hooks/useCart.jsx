@@ -1,21 +1,23 @@
-// api, axios (axios secure), tan stack 
-
-import { useQuery } from "@tanstack/react-query";
-import useAxiosSecure from "./useAxiosSecure";
+import { useQuery } from "react-query";
 import useAuth from "./useAuth";
+import useAxiosSecure from "./useAxiosSecure";
 
 const useCart = () => {
-    const axiosSecure = useAxiosSecure();
-    const { user} = useAuth();
-    const { refetch, data: cart = [] } = useQuery({
-        queryKey: ['cart', user?.email],
-        queryFn: async() => {
-            const res = await axiosSecure.get(`/carts?email=${user.email}`);
-            return res.data;
-        }
-    })
+  const [axiosSecure] = useAxiosSecure();
+  const { user } = useAuth();
 
-    return [cart, refetch]
+  const {
+    data: cart = [],
+    refetch,
+    isLoading,
+  } = useQuery({
+    queryKey: ["cart", user?.email],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/carts?email=${user?.email}`);
+      return res.data.data;
+    },
+  });
+  return [cart, refetch, isLoading];
 };
 
 export default useCart;

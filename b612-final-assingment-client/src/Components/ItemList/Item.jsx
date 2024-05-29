@@ -1,25 +1,37 @@
 import React from "react";
 
 const Item = ({ data }) => {
+  console.log(data);
+  const {
+    product_name,
+    product_category,
+    product_resale_price,
+    product_image,
+    product_condition,
+    product_description,
+    product_location,
+    product_phoneNumber,
+    product_postdate,
+  } = data;
   return (
     <div className="mt-8">
       <ul className="space-y-4">
         <li className="flex items-center gap-4">
           <img
-            src="https://images.unsplash.com/photo-1618354691373-d851c5c3a990?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=830&q=80"
+            src={product_image}
             alt=""
             className="h-20 w-20 rounded object-cover"
           />
           <div>
-            <h3 className="text-xl text-gray-900">Basic Tee 6-Pack</h3>
+            <h3 className="text-xl text-gray-900">{product_name}</h3>
             <dl className="mt-0.5 space-y-px text-[14px] text-gray-600">
               <div>
-                <dt className="inline">Size:</dt>
-                <dd className="inline">XXS</dd>
+                <dt className="inline">Category:</dt>
+                <dd className="inline">{product_category}</dd>
               </div>
               <div>
-                <dt className="inline">Color:</dt>
-                <dd className="inline">White</dd>
+                <dt className="inline">Condition:</dt>
+                <dd className="inline">{product_condition}</dd>
               </div>
             </dl>
           </div>

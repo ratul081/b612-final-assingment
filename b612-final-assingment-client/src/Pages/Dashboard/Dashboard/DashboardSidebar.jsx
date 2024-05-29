@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import useAdmin from "../../../hooks/useAdmin";
 import useSeller from "../../../hooks/useSeller";
 const DashboardSidebar = () => {
-  const [isAdmin = true] = useAdmin();
-  const [isSeller = true] = useSeller();
+  const [isAdmin] = useAdmin();
+  const [isSeller] = useSeller();
   return (
     <>
       <li>
@@ -12,7 +12,7 @@ const DashboardSidebar = () => {
           Dashboard
         </Link>
       </li>
-      {isAdmin && (
+      {!isAdmin && (
         <>
           <li>
             <Link className="text-xl font-semibold" to="/dashboard/all-users">
@@ -33,7 +33,7 @@ const DashboardSidebar = () => {
           </li>
         </>
       )}
-      {isSeller && (
+      {!isSeller && (
         <>
           <li>
             <Link className="text-xl font-semibold" to="/dashboard/my-products">
@@ -45,9 +45,14 @@ const DashboardSidebar = () => {
               Add Product
             </Link>
           </li>
+          <li>
+            <Link className="text-xl font-semibold" to="/dashboard/my-buyers">
+              My buyers
+            </Link>
+          </li>
         </>
       )}
-      {!(!isAdmin && !isSeller) && (
+      {(!isAdmin && !isSeller) && (
         <>
           <li>
             <Link className="text-xl font-semibold" to="/dashboard/my-wishlist">

@@ -9,7 +9,7 @@ const DashboardLayout = () => {
       {/* <Header></Header> */}
       <div className="drawer lg:drawer-open">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-        <div className="drawer-content m-12">
+        <div className="drawer-content my-12">
           {/* Page content here */}
           <Outlet></Outlet>
           <label
@@ -18,12 +18,12 @@ const DashboardLayout = () => {
             Open drawer
           </label>
         </div>
-        <div className="drawer-side">
+        <div className="drawer-side mt-8">
           <label
             htmlFor="my-drawer-2"
             aria-label="close sidebar"
             className="drawer-overlay"></label>
-          <ul className="menu p-4 w-80 min-h-full  space-y-4 text-base-content">
+          <ul className="menu p-4 w-72 min-h-full  space-y-4 text-base-content">
             {/* Sidebar content here */}
             <DashboardSidebar></DashboardSidebar>
           </ul>

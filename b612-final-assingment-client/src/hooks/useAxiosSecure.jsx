@@ -1,10 +1,11 @@
 import axios from "axios";
-import React, { useEffect } from "react";
-import useAuth from "./useAuth";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import useAuth from "./useAuth";
 
 const axiosSecure = axios.create({
-  baseURL: `${import.meta.env.API_URL}`,
+  baseURL: `${import.meta.env.VITE_apiURL}`,
+  // baseURL: "http://localhost:3000",
 });
 // const axiosSecure = axios.create({
 //   baseURL: "https://doctors-portal-server-ratul081.vercel.app/",

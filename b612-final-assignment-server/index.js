@@ -25,7 +25,6 @@ async function dbConnect() {
   try {
     await client.connect();
     console.log("Database connected".yellow);
-    console.log("Hi");
   } catch (error) {
     console.log(error.name.bgRed, error.message.bold);
   }
@@ -52,27 +51,18 @@ function verifyJWT(req, res, next) {
 //run function
 async function run() {
   try {
-    const usersCollection = client.db("resaleProducts").collection("usersData");
-    const cartCollection = client
-      .db("resaleProducts")
-      .collection("carts");
-    const categoryCollection = client
-      .db("resaleProducts")
-      .collection("categoryData");
-    const productsCollection = client
-      .db("resaleProducts")
-      .collection("productsData");
-    const blogCollection = client
-      .db("resaleProducts")
-      .collection("questionAndAnswer");
-    const paymentsCollection = client
-      .db("resaleProducts")
-      .collection("payments");
+    const database = client.db("b612-resale-product-assignment_db")
+    const usersCollection = database.collection("users");
+    const cartCollection = database.collection("carts");
+    const categoryCollection = database.collection("categoryData");
+    const productsCollection = database.collection("products");
+    const blogCollection = database.collection("questionAndAnswer");
+    const paymentsCollection = database.collection("payments");
 
     // jwt access token
     app.get("/jwt", async (req, res) => {
       const email = req.query.email;
-      const query = { email: email };
+      const query = { user_email: email };
       const user = await usersCollection.findOne(query);
       if (user) {
         const token = jwt.sign({ email }, process.env.ACCESS_TOKEN, {
@@ -114,7 +104,7 @@ async function run() {
     //get method for checking admin in useAdmin hook
     app.get("/users/admin/:email", async (req, res) => {
       const email = req.params.email;
-      const query = { email: email };
+      const query = { user_email: email };
       const user = await usersCollection.findOne(query);
       res.send({ isAdmin: user?.role === "admin" });
     });
@@ -122,7 +112,7 @@ async function run() {
     //get method for checking seller in useSeller hook
     app.get("/users/seller/:email", async (req, res) => {
       const email = req.params.email;
-      const query = { email: email };
+      const query = { user_email: email };
       const user = await usersCollection.findOne(query);
       res.send({ isSeller: user?.type === "Seller" });
     });
@@ -130,7 +120,7 @@ async function run() {
     //get method for checking buyer in useBuyer hook
     app.get("/users/buyer/:email", async (req, res) => {
       const email = req.params.email;
-      const query = { email: email };
+      const query = { user_email: email };
       const user = await usersCollection.findOne(query);
       res.send({ isBuyer: user?.type === "Buyer" });
     });
@@ -139,45 +129,71 @@ async function run() {
     app.get("/questions", async (req, res) => {
       const query = {};
       const result = await blogCollection.find(query).toArray();
-      res.send(result);
+      res.send({
+        status: true,
+        massage: "Successfully got the data",
+        data: result,
+      });
     });
 
     //get three category items
     app.get("/categories", async (req, res) => {
       const query = {};
       const result = await categoryCollection.find(query).toArray();
-      res.send(result);
+      res.send({
+        status: true,
+        massage: "Successfully got the data",
+        data: result,
+      });
     });
 
-    //get all products items
+    //get a product by id
     app.get("/products/:id", async (req, res) => {
-      const category_id = req.params.id;
-      const filter = { category_id };
-      const result = await productsCollection.find(filter).toArray();
-      res.send(result);
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) }
+      const productsById = await productsCollection.findOne(query);
+      res.send({
+        status: true,
+        massage: "Successfully got the data",
+        data: productsById,
+      });
     });
 
     //get products by email
     app.get("/product/:email", async (req, res) => {
       const email = req.params.email;
-      const query = { email: email };
+      const query = { product_email: email };
       const cursor = productsCollection.find(query);
-      const products = await cursor.toArray();
-      res.send(products);
+      const productsByEmail = await cursor.toArray();
+      res.send({
+        status: true,
+        massage: "Successfully got the data",
+        data: productsByEmail,
+      });
     });
 
     //get method for booking product
 
     app.get("/carts", async (req, res) => {
       const email = req.query.email;
-
-      // const decodedEmail = req.decoded.email;
-      // if (email !== decodedEmail) {
-      //   return res.status(403).send({ message: "forbidden access" });
-      // }
-      const query = { email };
+      const query = { buyer_email: email };
       const booking = await cartCollection.find(query).toArray();
-      res.send(booking);
+      res.send({
+        status: true,
+        massage: "Successfully got the data",
+        data: booking,
+      });
+    });
+    //get method for orders product
+    app.get("/orders", async (req, res) => {
+      const email = req.query.email;
+      const query = { buyer_email: email };
+      const booking = await cartCollection.find(query).toArray();
+      res.send({
+        status: true,
+        massage: "Successfully got the data",
+        data: booking,
+      });
     });
 
     //get booking items by id
@@ -185,22 +201,34 @@ async function run() {
       const id = req.params.id;
       const query = { _id: new ObjectId(id) };
       const result = await cartCollection.findOne(query);
-      res.send(result);
+      res.send({
+        status: true,
+        massage: "Successfully got the data",
+        data: result,
+      });
     });
 
     //get users by get method
     app.get("/users", async (req, res) => {
       // const user = req.body;
       const query = {};
-      const filter = await usersCollection.find(query).toArray();
-      res.send(filter);
+      const allUser = await usersCollection.find(query).toArray();
+      res.send({
+        status: true,
+        massage: "Successfully got the data",
+        data: allUser,
+      });
     });
 
     //get products for advertising in home
     app.get("/products", async (req, res) => {
       const query = {};
-      const result = await productsCollection.find(query).toArray();
-      res.send(result);
+      const products = await productsCollection.find(query).toArray();
+      res.send({
+        status: true,
+        massage: "Successfully got the data",
+        data: products,
+      });
     });
 
     //delete method for delete user from allUsers
@@ -208,7 +236,11 @@ async function run() {
       const id = req.params.id;
       const filter = { _id: new ObjectId(id) };
       const result = await usersCollection.deleteOne(filter);
-      res.send(result);
+      res.send({
+        status: true,
+        massage: "Successfully got the data",
+        data: result,
+      });
     });
 
     //delete order from my order
@@ -216,7 +248,11 @@ async function run() {
       const id = req.params.id;
       const filter = { _id: new ObjectId(id) };
       const result = await cartCollection.deleteOne(filter);
-      res.send(result);
+      res.send({
+        status: true,
+        massage: "Successfully got the data",
+        data: result,
+      });
     });
 
     //delete method single person product
@@ -224,21 +260,33 @@ async function run() {
       const id = req.params.id;
       const filter = { _id: new ObjectId(id) };
       const result = await productsCollection.deleteOne(filter);
-      res.send(result);
+      res.send({
+        status: true,
+        massage: "Successfully got the data",
+        data: result,
+      });
     });
 
     //post method for post products
-    app.post("/products", async (req, res) => {
+    app.post("/add-product", async (req, res) => {
       const product = req.body;
       const result = await productsCollection.insertOne(product);
-      res.send(result);
+      res.send({
+        status: true,
+        massage: "Successfully got the data",
+        data: result,
+      });
     });
 
     //post method for users information
-    app.post("/users", async (req, res) => {
+    app.post("/add-user", async (req, res) => {
       const user = req.body;
       const result = await usersCollection.insertOne(user);
-      res.send(result);
+      res.send({
+        status: true,
+        massage: "Successfully got the data",
+        data: result,
+      });
     });
 
     //payments history post method
@@ -254,7 +302,11 @@ async function run() {
         },
       };
       const updateResult = await cartCollection.updateOne(filter, updateDoc);
-      res.send(result);
+      res.send({
+        status: true,
+        massage: "Successfully got the data",
+        data: result,
+      });
     });
 
     //put method for upsert and make admin
@@ -272,7 +324,11 @@ async function run() {
         updateDoc,
         options
       );
-      res.send(result);
+      res.send({
+        status: true,
+        massage: "Successfully got the data",
+        data: result,
+      });
     });
 
     //put method for verified seller
@@ -290,7 +346,11 @@ async function run() {
         updateDoc,
         options
       );
-      res.send(result);
+      res.send({
+        status: true,
+        massage: "Successfully got the data",
+        data: result,
+      });
     });
 
     //put method for ad items true
@@ -308,14 +368,22 @@ async function run() {
         updateDoc,
         options
       );
-      res.send(result);
+      res.send({
+        status: true,
+        massage: "Successfully got the data",
+        data: result,
+      });
     });
 
     //post methods for booking items
     app.post("/carts", async (req, res) => {
       const booking = req.body;
       const result = await cartCollection.insertOne(booking);
-      res.send(result);
+      res.send({
+        status: true,
+        massage: "Successfully got the data",
+        data: result,
+      });
     });
   } finally {
   }

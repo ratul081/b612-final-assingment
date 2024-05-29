@@ -1,7 +1,24 @@
 import React from "react";
 import ItemList from "../../../../Components/ItemList/ItemList";
+import useAxiosSecure from "../../../../hooks/useAxiosSecure";
+import useAuth from "../../../../hooks/useAuth";
+import { useQuery } from "react-query";
 
 const MyOrders = () => {
+  const [axiosSecure] = useAxiosSecure();
+  const { user } = useAuth();
+
+  const {
+    data: myOrders = [],
+    refetch,
+    isLoading,
+  } = useQuery({
+    queryKey: ["myOrders", user?.email],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/orders?email=${user?.email}`);
+      return res.data.data;
+    },
+  });
   return (
     <div>
       {/* <section>
@@ -57,7 +74,7 @@ const MyOrders = () => {
           </div>
         </div>
       </section> */}
-      <ItemList pageName="Orders"></ItemList>
+      <ItemList pageName="Orders" data={myOrders}></ItemList>
     </div>
   );
 };

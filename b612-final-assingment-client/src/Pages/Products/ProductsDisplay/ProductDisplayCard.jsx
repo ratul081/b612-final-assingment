@@ -1,7 +1,19 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-const ProductCard = ({ product }) => {
-  const { _id, name, img, resalePrice } = product;
+const ProductDisplayCard = ({ product, setProductDetails }) => {
+  const {
+    product_name,
+    user_email,
+    product_category,
+    product_resale_price,
+    product_image,
+    product_condition,
+    product_description,
+    product_location,
+    product_phoneNumber,
+    product_postdate,
+  } = product;
   const handleAddToCart = () => {
     if (user && user.email) {
       //send cart item to the database
@@ -48,23 +60,47 @@ const ProductCard = ({ product }) => {
       <figure>
         <img
           className="h-64 w-60 object-cover"
-          src="https://i.postimg.cc/wTgsW1jx/Juging.jpg"
-          alt={name}
+          src={product_image}
+          alt={product_name}
         />
       </figure>
       <div className="card-body mx-2">
         <div>
-          <p className="font-bold text-2xl">{name}</p>
+          <p className="font-bold text-2xl">{product_name}</p>
           <p className="font-bold text-xl">
-            ৳<span>{resalePrice}</span>
+            ৳<span>{product_resale_price}</span>
           </p>
         </div>
-        <div className="flex justify-end">
-          <button className=" text-lg p-2 rounded-xl">Add to cart</button>
+        <div className="flex justify-between">
+          <Link
+            to={product._id}
+            className="inline-flex items-center px-3 font-medium text-center text-white bg-blue-700 rounded-lg">
+            See more
+            <svg
+              className="rtl:rotate-180 w-3.5 h-3.5 ms-2"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 14 10">
+              <path
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M1 5h12m0 0L9 1m4 4L9 9"
+              />
+            </svg>
+          </Link>
+          <label
+            htmlFor="booking-modal"
+            onClick={() => setProductDetails(product)}
+            className="btn btn-accent text-white">
+            Book now
+          </label>
         </div>
       </div>
     </div>
   );
 };
 
-export default ProductCard;
+export default ProductDisplayCard;

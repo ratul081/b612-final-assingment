@@ -20,7 +20,7 @@ import SellerDashboard from "../Pages/Dashboard/Seller/SellerDashboard";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import Home from "../Pages/Home/Home";
 import LogIn from "../Pages/Login/LogIn";
-import Product from "../Pages/Product/Product";
+import ProductOverview from "../Pages/Product/ProductOverview";
 import Products from "../Pages/Products/Products";
 import Register from "../Pages/Register/Register";
 
@@ -35,9 +35,14 @@ export const routes = createBrowserRouter([
       { path: "/contact", element: <Contacts></Contacts> },
       { path: "/about", element: <About></About> },
       { path: "/products", element: <Products></Products> },
-      { path: "/cart", element: <Cart></Cart> },
+      {
+        path: "/products/:id",
+        element: <ProductOverview></ProductOverview>,
+        loader: ({ params }) =>
+          fetch(`${import.meta.env.VITE_apiURL}/products/${params.id}`),
+      },
+      { path: "/carts", element: <Cart></Cart> },
       { path: "/checkout", element: <CheckOut></CheckOut> },
-      { path: "/product", element: <Product></Product> },
       {
         path: "/dashboard",
         element: <DashboardLayout></DashboardLayout>,
@@ -65,7 +70,12 @@ export const routes = createBrowserRouter([
             element: <AddProduct></AddProduct>,
           },
           { path: "/dashboard/my-buyers", element: <MyBuyers></MyBuyers> },
-          { path: "/dashboard/my-products", element: <MyProducts></MyProducts> },
+
+          {
+            path: "/dashboard/my-products",
+            element: <MyProducts></MyProducts>,
+          },
+
           {
             path: "/dashboard/buyerDashboard",
             element: <BuyerDashboard></BuyerDashboard>,

@@ -3,9 +3,11 @@ import { AiOutlineHeart } from "react-icons/ai";
 import { BsCart3 } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
+import useCart from "../../hooks/useCart";
 
 const NavBar = () => {
   const { user, logOut } = useAuth();
+  const [cart, refetch] = useCart();
   // console.log("🚀 ~ file: NavBar.jsx:9 ~ NavBar ~ user:", user);
   const handleLogOut = () => {
     logOut();
@@ -35,7 +37,7 @@ const NavBar = () => {
         <Link to="/my-account">Manage My Account</Link>
       </li>
       <li>
-        <Link to="/orders">Orders</Link>
+        <Link to="/carts">Orders</Link>
       </li>
       <li>
         <Link to="/reviews">Reviews</Link>
@@ -105,9 +107,10 @@ const NavBar = () => {
             <Link to="/whitelist">
               <AiOutlineHeart className=" w-6 h-6" />
             </Link>
-            <Link to="/orders">
+            <Link to="/carts" className="mx-2">
               <BsCart3 className="w-6 h-6 ml-4" />
             </Link>
+            {cart.length !== 0 && <sub>{cart.length}</sub>}
           </div>
           {user && user?.uid ? (
             <>
