@@ -4,8 +4,10 @@ const MyAccount = () => {
   return (
     <>
       <div>
-        <p className="text-[#DB4444] text-xl mx-3 mb-4">Update your Profile</p>
-        <div className="lg:w-[870px] w-[350px] mx-6">
+        <p className="text-[#DB4444] text-xl text-center lg:text-start mx-3 mb-4">
+          Update your Profile
+        </p>
+        <div className="w-[340px] lg:w-[870px] md:w-[550px] mx-6">
           <form>
             <div className="-mx-2 md:items-center md:flex">
               <div className="flex-1 px-2">

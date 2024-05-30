@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, Navigate } from "react-router-dom";
 
-const ProductCard = ({ myProduct }) => {
+const MyProductCard = ({ myProduct }) => {
   const {
     product_name,
     product_category,
@@ -15,7 +15,11 @@ const ProductCard = ({ myProduct }) => {
   return (
     <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow">
       <>
-        <img className="rounded-t-lg" src={product_image} alt={product_name} />
+        <img
+          className="rounded-t-lg h-64 w-full object-cover"
+          src={product_image}
+          alt={product_name}
+        />
       </>
       <div className="p-5">
         <Link to={`/products/${_id}`}>
@@ -63,4 +67,4 @@ const ProductCard = ({ myProduct }) => {
   );
 };
 
-export default ProductCard;
+export default MyProductCard;

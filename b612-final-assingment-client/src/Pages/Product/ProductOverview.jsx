@@ -7,23 +7,23 @@ import useCart from "../../hooks/useCart";
 const ProductOverview = () => {
   const productData = useLoaderData().data;
   const [productDetails, setProductDetails] = useState(productData);
-  const [, refetch] = useCart();
   return (
-    <div className="m-10 flex gap-12 justify-center">
-      <div>
+    <div className="m-6 md:m-10 md:flex md:gap-12 justify-center">
+      <div className="md:w-1/2">
         <img
-          className="w-[480px] h-[480px]"
+          className="w-[360px] h-[220px] md:w-[480px] md:h-[480px] object-cover"
           src={productData?.product_image}
           alt=""
           srcSet=""
         />
       </div>
-      <ProductDetails productData={productData}></ProductDetails>
+      <div className="md:w-1/2">
+        <ProductDetails productData={productData}></ProductDetails>
+      </div>
       {productDetails && (
         <BookingModal
           productDetails={productDetails}
-          setProductDetails={setProductDetails}
-          refetch={refetch}></BookingModal>
+          setProductDetails={setProductDetails}></BookingModal>
       )}
     </div>
   );

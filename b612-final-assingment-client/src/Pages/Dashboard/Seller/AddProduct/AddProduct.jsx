@@ -1,13 +1,15 @@
-import React, { useState } from "react";
-import { useForm } from "react-hook-form";
-import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import axios from "axios";
-import useAuth from "../../../../hooks/useAuth";
-import Swal from "sweetalert2";
+import React from "react";
+import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import useAuth from "../../../../hooks/useAuth";
+import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 const image = import.meta.env.VITE_image_upload_token;
 
 const AddProduct = () => {
+  const navigate = useNavigate();
   const { user } = useAuth();
   const [axiosSecure] = useAxiosSecure();
   const today = new Date();
@@ -17,7 +19,6 @@ const AddProduct = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-
   const handleAddProduct = (data) => {
     const formData = new FormData();
     formData.append("image", data.image[0]);
@@ -65,6 +66,7 @@ const AddProduct = () => {
                   showConfirmButton: false,
                   timer: 1500,
                 });
+                navigate("/my-product");
               } else {
                 console.log(res.data.data);
                 toast.error(res.data.data.message);
@@ -88,12 +90,12 @@ const AddProduct = () => {
   };
 
   return (
-    <div>
+    <div className="m-4">
       <p className="font-semibold text-2xl">Add product</p>
       <form
         onSubmit={handleSubmit(handleAddProduct)}
-        className="space-y-6 flex gap-6">
-        <div className=" w-[684px]">
+        className="space-y-6 lg:flex gap-6">
+        <div className=" lg:w-[684px]">
           <div className="mt-6 border border-amber-950 rounded">
             <div className="mt-8 mx-6 mb-6">
               <p className="font-semibold text-2xl">General Information</p>
@@ -229,7 +231,7 @@ const AddProduct = () => {
             </div>
           </div>
         </div>
-        <div className="w-[440px]">
+        <div className="lg:w-[440px]">
           <div className="border border-amber-950 rounded">
             <div className="mt-8 mx-6 mb-6">
               <p className="font-semibold text-2xl">Product Media</p>
@@ -275,8 +277,12 @@ const AddProduct = () => {
               )}
             </div>
           </div>
-          <div className="h-52 flex place-items-end justify-center">
-            <input type="submit" value="submit" className="btn w-60" />
+          <div className="h-52 mt-4 flex lg:place-items-end justify-center">
+            <input
+              type="submit"
+              value="submit"
+              className="btn btn-success w-60"
+            />
           </div>
         </div>
       </form>

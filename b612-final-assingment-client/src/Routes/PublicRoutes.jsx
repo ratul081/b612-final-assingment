@@ -21,6 +21,7 @@ import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import Home from "../Pages/Home/Home";
 import LogIn from "../Pages/Login/LogIn";
 import ProductOverview from "../Pages/Product/ProductOverview";
+import CategoryProducts from "../Pages/Products/Categories/CategoryProducts";
 import Products from "../Pages/Products/Products";
 import Register from "../Pages/Register/Register";
 
@@ -40,6 +41,16 @@ export const routes = createBrowserRouter([
         element: <ProductOverview></ProductOverview>,
         loader: ({ params }) =>
           fetch(`${import.meta.env.VITE_apiURL}/products/${params.id}`),
+      },
+      {
+        path: "/category/:category",
+        element: <CategoryProducts></CategoryProducts>,
+        loader: ({ params }) =>
+          fetch(
+            `${import.meta.env.VITE_apiURL}/products-category/${
+              params.category
+            }`
+          ),
       },
       { path: "/carts", element: <Cart></Cart> },
       { path: "/checkout", element: <CheckOut></CheckOut> },

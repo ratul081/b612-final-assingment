@@ -21,11 +21,11 @@ const Team = () => {
   ];
 
   return (
-    <div className="flex justify-around mt-32 mb-8">
+    <div className="grid md:grid-cols-1 place-items-center lg:grid-cols-3 mt-32 mb-8">
       {teamInfo.map((data, idx) => (
         <div key={idx}>
           <img
-            className="w-[326px] h-[392px] object-scale-down"
+            className="md:w-[326px] md:h-[392px] w-[300px] object-scale-down"
             src={data?.photo}
             alt=""
           />

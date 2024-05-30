@@ -2,9 +2,9 @@ import React from "react";
 
 const AboutBanner = () => {
   return (
-    <section className="grid grid-cols-2 my-6">
+    <section className="grid md:grid-cols-2 my-6">
       <div className="grid items-center">
-        <div className="mx-10">
+        <div className="lg:mx-10">
           <p className="font-semibold text-5xl my-10">Our Story</p>
           <p>
             Launced in 2015, Exclusive is South Asia’s premier online shopping

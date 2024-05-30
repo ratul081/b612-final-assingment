@@ -19,7 +19,7 @@ const ServicesInfo = () => {
     },
   ];
   return (
-    <div className="flex justify-around mt-36 mb-24">
+    <div className="grid lg:grid-cols-3 mt-36 mb-24">
       {serviceInfo.map((data, idx) => (
         <div className="grid items-center" key={idx}>
           <div className="flex justify-center">

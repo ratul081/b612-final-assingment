@@ -21,8 +21,8 @@ const MilestoneAchievement = () => {
     },
   ];
   return (
-    <section className="flex justify-center mt-28">
-      <div className="flex justify-around gap-8">
+    <section className="flex justify-center text-center lg:mt-28">
+      <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 justify-around gap-8">
         {milestoneInfo &&
           milestoneInfo.map((data, idx) => (
             <div

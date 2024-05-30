@@ -16,8 +16,8 @@ const ProductDetails = ({ productData }) => {
     product_postdate,
   } = productData;
   return (
-    <div className="space-y-4">
-      <p className="text-2xl font-semibold">{product_name}</p>
+    <div className="lg:space-y-4 space-y-1 md:space-y-2">
+      <p className="text-2xl mt-4 font-semibold">{product_name}</p>
       <p>{productData ? <span>In stock</span> : <span>out of stock</span>}</p>
       <p className="text-2xl">৳ {product_resale_price}</p>
       <p>{product_description}</p>
@@ -32,8 +32,8 @@ const ProductDetails = ({ productData }) => {
           <CiHeart className="h-10 w-10" />
         </button>
       </div>
-      <div className="border rounded mt-10">
-        <div className=" m-6">
+      <div className="border rounded">
+        <div className="lg:m-6 md:m-2 m-4">
           <div className="flex gap-4">
             <div>
               <TbTruckDelivery className="h-10 w-10" />
@@ -46,7 +46,7 @@ const ProductDetails = ({ productData }) => {
             </div>
           </div>
         </div>
-        <div className=" m-6">
+        <div className="lg:m-6 md:m-2 m-4">
           <div className="flex gap-4">
             <div>
               <TbTruckReturn className="h-10 w-10" />

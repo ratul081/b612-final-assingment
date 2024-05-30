@@ -1,5 +1,5 @@
 import React from "react";
-import ProductCard from "./ProductCard";
+import MyProductCard from "./MyProductCard";
 import { useQuery } from "react-query";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import useAuth from "../../../../hooks/useAuth";
@@ -14,23 +14,23 @@ const MyProducts = () => {
   } = useQuery({
     queryKey: ["myProduct", user?.email],
     queryFn: async () => {
-      const res = await axiosSecure.get(`/product/${user?.email}`);
+      const res = await axiosSecure.get(`/products-email/${user?.email}`);
       return res.data.data;
     },
   });
   console.log("🚀 ~ MyProducts ~ myProducts:", myProducts);
   return (
-    <div>
-      {(myProducts.length === 0) ? (
+    <div className="m-4">
+      {myProducts.length === 0 ? (
         <div> No data found</div>
       ) : (
         <>
           <p className="text-3xl font-semibold mb-8">Here are your products</p>
-          <div className="grid grid-cols-3 gap-12">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-12">
             {myProducts.map((myProduct) => (
-              <ProductCard
+              <MyProductCard
                 key={myProduct._id}
-                myProduct={myProduct}></ProductCard>
+                myProduct={myProduct}></MyProductCard>
             ))}
           </div>
         </>

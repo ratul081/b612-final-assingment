@@ -2,17 +2,19 @@ import React from "react";
 import { Link } from "react-router-dom";
 import useAdmin from "../../../hooks/useAdmin";
 import useSeller from "../../../hooks/useSeller";
+import useBuyer from "../../../hooks/useBuyer";
 const DashboardSidebar = () => {
   const [isAdmin] = useAdmin();
   const [isSeller] = useSeller();
+  const [isBuyer] = useBuyer();
   return (
     <>
-      <li>
+      <li className="mt-8">
         <Link className="text-xl font-semibold" to="/dashboard">
           Dashboard
         </Link>
       </li>
-      {!isAdmin && (
+      {isAdmin && (
         <>
           <li>
             <Link className="text-xl font-semibold" to="/dashboard/all-users">
@@ -33,7 +35,7 @@ const DashboardSidebar = () => {
           </li>
         </>
       )}
-      {!isSeller && (
+      {isSeller && (
         <>
           <li>
             <Link className="text-xl font-semibold" to="/dashboard/my-products">
@@ -52,7 +54,7 @@ const DashboardSidebar = () => {
           </li>
         </>
       )}
-      {(!isAdmin && !isSeller) && (
+      {isBuyer && (
         <>
           <li>
             <Link className="text-xl font-semibold" to="/dashboard/my-wishlist">

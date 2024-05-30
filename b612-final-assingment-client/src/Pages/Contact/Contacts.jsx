@@ -5,8 +5,8 @@ const Contacts = () => {
     <div>
       <section className="bg-white">
         <div className="container px-6 py-6 mx-auto">
-          <div className="grid grid-cols-1 gap-12 mt-10 lg:grid-cols-3 mx-24">
-            <div className="flex flex-col mt-20 w-4/5">
+          <div className="grid grid-cols-1 gap-12 mt-10 lg:grid-cols-3 lg:mx-24">
+            <div className="flex justify-center flex-col lg:mt-20 lg:w-4/5">
               <div>
                 <div className="flex items-center gap-4 mb-4">
                   <svg
@@ -31,7 +31,7 @@ const Contacts = () => {
                   <p>Phone: +8801611112222</p>
                 </div>
               </div>
-              <div class="divider my-8"></div>
+              <div className="divider my-8"></div>
               <div>
                 <div className="flex items-center gap-4 mb-4">
                   <svg
@@ -112,7 +112,7 @@ const Contacts = () => {
                   />
                 </div>
                 <div className="flex justify-end">
-                  <button className="w-1/4 px-6 py-3 mt-4 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-lg hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
+                  <button className="w-1/4 px-2 md:px-6 py-3 mt-4 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-lg hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
                     Send message
                   </button>
                 </div>

@@ -90,7 +90,6 @@ async function run() {
       const booking = req.body;
       const price = booking.price;
       const amount = parseInt(price) * 100;
-
       const paymentIntent = await stripe.paymentIntents.create({
         currency: "usd",
         amount: amount,

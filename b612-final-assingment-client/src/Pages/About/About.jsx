@@ -6,12 +6,12 @@ import Team from "./Team";
 
 const About = () => {
   return (
-    <>
+    <div className="m-6">
       <AboutBanner></AboutBanner>
       <MilestoneAchievement></MilestoneAchievement>
       <Team></Team>
       <ServicesInfo></ServicesInfo>
-    </>
+    </div>
   );
 };
 

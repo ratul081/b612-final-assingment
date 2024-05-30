@@ -14,52 +14,11 @@ const ProductDisplayCard = ({ product, setProductDetails }) => {
     product_phoneNumber,
     product_postdate,
   } = product;
-  const handleAddToCart = () => {
-    if (user && user.email) {
-      //send cart item to the database
-      const cartItem = {
-        productId: _id,
-        email: user.email,
-        name,
-        image,
-        price,
-      };
-      axiosSecure.post("/carts", cartItem).then((res) => {
-        console.log(res.data);
-        if (res.data.insertedId) {
-          Swal.fire({
-            // position: "top-end",
-            icon: "success",
-            title: `${name} added to your cart`,
-            showConfirmButton: false,
-            timer: 1500,
-          });
-          // refetch cart to update the cart items count
-          refetch();
-        }
-      });
-    } else {
-      Swal.fire({
-        title: "You are not Logged In",
-        text: "Please login to add to the cart?",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, login!",
-      }).then((result) => {
-        if (result.isConfirmed) {
-          //   send the user to the login page
-          navigate("/login", { state: { from: location } });
-        }
-      });
-    }
-  };
   return (
-    <div className="card card-compact w-96">
+    <div className="card card-compact w-80 md:w-96">
       <figure>
         <img
-          className="h-64 w-60 object-cover"
+          className="md:h-64 md:w-60 object-cover"
           src={product_image}
           alt={product_name}
         />
@@ -73,7 +32,7 @@ const ProductDisplayCard = ({ product, setProductDetails }) => {
         </div>
         <div className="flex justify-between">
           <Link
-            to={product._id}
+            to={`/products/${product?._id}`}
             className="inline-flex items-center px-3 font-medium text-center text-white bg-blue-700 rounded-lg">
             See more
             <svg
