@@ -1,13 +1,13 @@
 import { Navigate, useLocation } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
-import useAdmin from "../hooks/useAdmin";
+import useSeller from "../hooks/useSeller";
 import { Triangle } from "react-loader-spinner";
-const AdminRoute = ({ children }) => {
+const SellerRoute = ({ children }) => {
   const { user, loading } = useAuth();
-  const [isAdmin, isAdminLoading] = useAdmin();
+  const [isSeller, isSellerLoading] = useSeller();
   const location = useLocation();
 
-  if (loading || isAdminLoading) {
+  if (loading || isSellerLoading) {
     return (
       <Triangle
         visible={true}
@@ -21,11 +21,11 @@ const AdminRoute = ({ children }) => {
     );
   }
 
-  if (user && isAdmin) {
+  if (user && isSeller) {
     return children;
   }
 
   return <Navigate to="/" state={{ from: location }} replace></Navigate>;
 };
 
-export default AdminRoute;
+export default SellerRoute;

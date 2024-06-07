@@ -1,7 +1,11 @@
 import React from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-const MyProductCard = ({ myProduct }) => {
+const MyProductCard = ({
+  myProduct,
+  handleAddProductAdvertised,
+  handleDeleteProductAdvertised,
+}) => {
   const {
     product_name,
     product_category,
@@ -13,7 +17,7 @@ const MyProductCard = ({ myProduct }) => {
     _id,
   } = myProduct;
   return (
-    <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow">
+    <div className=" bg-white border border-gray-200 rounded-lg shadow">
       <>
         <img
           className="rounded-t-lg h-64 w-full object-cover"
@@ -27,27 +31,22 @@ const MyProductCard = ({ myProduct }) => {
             {product_name}
           </h5>
         </Link>
-        <p className="mb-3 font-normal text-gray-700 -400">
+        <div className="mb-3 font-normal  text-gray-700">
           {product_description}
-        </p>
-        <div>
-          <Link className="col-span-2 inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg">
-            Modify
-            <svg
-              className="rtl:rotate-180 w-3.5 h-3.5 ms-2"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 14 10">
-              <path
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M1 5h12m0 0L9 1m4 4L9 9"
-              />
-            </svg>
-          </Link>
+        </div>
+        <div className="space-x-4">
+          <button
+            onClick={() => handleAddProductAdvertised(myProduct?._id)}
+            className={`col-span-2 inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg ${
+              myProduct?.ad && "btn-disabled bg-gray-400"
+            }`}>
+            Put on ad
+          </button>
+          <button
+            onClick={() => handleDeleteProductAdvertised(myProduct?._id)}
+            className={`col-span-2 inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-700 rounded-lg `}>
+            Delete
+          </button>
           <div className="flex justify-end h-10">
             {product_sold ? (
               <>

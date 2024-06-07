@@ -10,6 +10,10 @@ const axiosSecure = axios.create({
 // const axiosSecure = axios.create({
 //   baseURL: "https://doctors-portal-server-ratul081.vercel.app/",
 // });
+// const axiosSecure = axios.create({
+//   baseURL:
+//     "https://b612-final-assignment-server2-azuo2b5ml-ratul081s-projects.vercel.app/",
+// });
 
 const useAxiosSecure = () => {
   const { logOut } = useAuth();
@@ -18,9 +22,8 @@ const useAxiosSecure = () => {
     axiosSecure.interceptors.request.use((config) => {
       const token = localStorage.getItem("access-token");
       if (token) {
-        config.headers.Authorization = `Bearer ${token}`;
+        config.headers.authorization = `Bearer ${token}`;
       }
-      // console.log(config);
       return config;
     });
 

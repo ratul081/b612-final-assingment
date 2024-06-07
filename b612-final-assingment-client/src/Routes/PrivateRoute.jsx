@@ -1,22 +1,13 @@
 import { Navigate, useLocation } from "react-router";
 import useAuth from "../hooks/useAuth";
-
+import { Triangle } from "react-loader-spinner";
+import Loading from "../Components/Shared/Loading";
 const PrivateRoute = ({ children }) => {
   const { user, loading } = useAuth();
   const location = useLocation();
 
   if (loading) {
-    return (
-      <Triangle
-        visible={true}
-        height="80"
-        width="80"
-        color="#4fa94d"
-        ariaLabel="triangle-loading"
-        wrapperStyle={{}}
-        wrapperClass=""
-      />
-    );
+    return <Loading></Loading>;
   }
 
   if (user) {

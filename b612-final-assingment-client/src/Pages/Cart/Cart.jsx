@@ -6,7 +6,7 @@ import useCart from "../../hooks/useCart";
 
 const Cart = () => {
   const [cart, refetch] = useCart();
-  console.log("🚀 ~ Cart ~ cart:", cart);
+  //console.log("🚀 ~ Cart ~ cart:", cart);
   const totalPrice = cart.reduce(
     (total, item) => total + parseFloat(item.product_resale_price),
     0
@@ -24,7 +24,7 @@ const Cart = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axiosSecure.delete(`/carts/${id}`).then((res) => {
-          console.log(res.data);
+          // //console.log(res.data);
           if (res.data.data.deletedCount > 0) {
             refetch();
             Swal.fire({
@@ -69,9 +69,9 @@ const Cart = () => {
                               <div>
                                 <dt className="inline">Price:</dt>
                                 <dd className="inline">
-                                  {(cartProduct?.product_resale_price).toFixed(
-                                    3
-                                  )}
+                                  {parseFloat(
+                                    cartProduct?.product_resale_price
+                                  ).toFixed(3)}
                                 </dd>
                               </div>
                               <div>
@@ -121,7 +121,7 @@ const Cart = () => {
                         <dt>Discount</dt>
                         <dd>-£20</dd>
                       </div>
-                      <div className="flex justify-between !text-base font-medium">
+                      <div className="flex justify-between text-base font-medium">
                         <dt>Total</dt>
                         <dd>৳ {(totalPrice + 5).toFixed(3)}</dd>
                       </div>
@@ -150,7 +150,7 @@ const Cart = () => {
 
                     <div className="flex justify-end">
                       <Link
-                        to="/checkout"
+                        to="/dashboard/payment"
                         className="block rounded bg-gray-700 px-5 py-3 text-sm text-gray-100 transition hover:bg-gray-600">
                         Checkout
                       </Link>

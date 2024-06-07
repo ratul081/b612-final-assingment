@@ -1,24 +1,40 @@
 import React from "react";
+import Swal from "sweetalert2";
 import ItemList from "../../../../Components/ItemList/ItemList";
-import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import useAuth from "../../../../hooks/useAuth";
-import { useQuery } from "react-query";
+import useAxiosSecure from "../../../../hooks/useAxiosSecure";
+import useCart from "../../../../hooks/useCart";
 
 const MyOrders = () => {
   const [axiosSecure] = useAxiosSecure();
   const { user } = useAuth();
+  const [cart, refetch] = useCart();
 
-  const {
-    data: myOrders = [],
-    refetch,
-    isLoading,
-  } = useQuery({
-    queryKey: ["myOrders", user?.email],
-    queryFn: async () => {
-      const res = await axiosSecure.get(`/orders?email=${user?.email}`);
-      return res.data.data;
-    },
-  });
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.delete(`/carts/${id}`).then((res) => {
+          //console.log(res.data);
+          if (res.data.data.deletedCount > 0) {
+            refetch();
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your file has been deleted.",
+              icon: "success",
+            });
+          }
+        });
+      }
+    });
+  };
   return (
     <div>
       {/* <section>
@@ -74,7 +90,10 @@ const MyOrders = () => {
           </div>
         </div>
       </section> */}
-      <ItemList pageName="Orders" data={myOrders}></ItemList>
+      <ItemList
+        pageName="Orders"
+        data={cart}
+        handleDelete={handleDelete}></ItemList>
     </div>
   );
 };

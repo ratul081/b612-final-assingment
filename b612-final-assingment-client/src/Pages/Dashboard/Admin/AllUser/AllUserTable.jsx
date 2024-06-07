@@ -13,13 +13,12 @@ const AllUserTable = ({ userData, refetch }) => {
     user_phoneNumber,
   } = userData;
   const handleMakeAdmin = (user) => {
-    console.log("🚀 ~ handleMakeAdmin ~ user:", user);
+    // //console.log("🚀 ~ handleMakeAdmin ~ user:", user);
     axiosSecure.patch(`/users/admin/${user?._id}`).then((res) => {
-      console.log(res.data);
-      if (res.data.modifiedCount > 0) {
+      //console.log(res.data);
+      if (res.data.data.modifiedCount > 0) {
         refetch();
         Swal.fire({
-          position: "top-end",
           icon: "success",
           title: `${user?.name} is an Admin Now!`,
           showConfirmButton: false,
@@ -41,7 +40,7 @@ const AllUserTable = ({ userData, refetch }) => {
     }).then((result) => {
       if (result.isConfirmed) {
         axiosSecure.delete(`/users/${user?._id}`).then((res) => {
-          if (res.data.deletedCount > 0) {
+          if (res.data.data.deletedCount > 0) {
             refetch();
             Swal.fire({
               title: "Deleted!",
@@ -81,9 +80,7 @@ const AllUserTable = ({ userData, refetch }) => {
               Make admin
             </button>
           )}
-          <button
-            onClick={() => handleDeleteUser(userData)}
-            className=" btn-lg">
+          <button onClick={() => handleDeleteUser(userData)} className="btn-lg">
             <FaTrashAlt className="text-red-600"></FaTrashAlt>
           </button>
         </div>

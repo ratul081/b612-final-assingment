@@ -18,7 +18,7 @@ const ProductDisplayCard = ({ product, setProductDetails }) => {
     <div className="card card-compact w-80 md:w-96">
       <figure>
         <img
-          className="md:h-64 md:w-60 object-cover"
+          className="md:h-64 h-52 aspect-auto		 md:w-60 object-cover"
           src={product_image}
           alt={product_name}
         />

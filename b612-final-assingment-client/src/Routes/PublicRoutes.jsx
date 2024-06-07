@@ -11,8 +11,11 @@ import AllUser from "../Pages/Dashboard/Admin/AllUser/AllUser";
 import ReportedItems from "../Pages/Dashboard/Admin/ReportedItems/ReportedItems";
 import BuyerDashboard from "../Pages/Dashboard/Buyer/BuyerDashboard";
 import MyOrders from "../Pages/Dashboard/Buyer/MyOrders/MyOrders";
-import MyWishlist from "../Pages/Dashboard/Buyer/MyWhitelist/MyWishlist";
+// import MyWishlist from "../Pages/Dashboard/Buyer/MyWhitelist/MyWishlist";
+import Blog from "../Pages/Blog/Blog";
 import Dashboard from "../Pages/Dashboard/Dashboard/Dashboard";
+import Payment from "../Pages/Dashboard/Payment/Payment";
+import PaymentHistory from "../Pages/Dashboard/Payment/PaymentHistory";
 import AddProduct from "../Pages/Dashboard/Seller/AddProduct/AddProduct";
 import MyBuyers from "../Pages/Dashboard/Seller/MyBuyers/MyBuyers";
 import MyProducts from "../Pages/Dashboard/Seller/MyProducts/MyProducts";
@@ -24,6 +27,10 @@ import ProductOverview from "../Pages/Product/ProductOverview";
 import CategoryProducts from "../Pages/Products/Categories/CategoryProducts";
 import Products from "../Pages/Products/Products";
 import Register from "../Pages/Register/Register";
+import AdminRoute from "./AdminRoute";
+import BuyerRoute from "./BuyerRoute";
+import PrivateRoute from "./PrivateRoute";
+import SellerRoute from "./SellerRoute";
 
 export const routes = createBrowserRouter([
   {
@@ -35,6 +42,7 @@ export const routes = createBrowserRouter([
       { path: "/sign-up", element: <Register></Register> },
       { path: "/contact", element: <Contacts></Contacts> },
       { path: "/about", element: <About></About> },
+      { path: "/blog", element: <Blog></Blog> },
       { path: "/products", element: <Products></Products> },
       {
         path: "/products/:id",
@@ -56,46 +64,116 @@ export const routes = createBrowserRouter([
       { path: "/checkout", element: <CheckOut></CheckOut> },
       {
         path: "/dashboard",
-        element: <DashboardLayout></DashboardLayout>,
+        element: (
+          <PrivateRoute>
+            <DashboardLayout></DashboardLayout>
+          </PrivateRoute>
+        ),
         children: [
           {
             path: "/dashboard",
             element: <Dashboard></Dashboard>,
           },
+          // admin only routes
           {
             path: "/dashboard/adminDashboard",
-            element: <AdminDashboard></AdminDashboard>,
+            element: (
+              <AdminRoute>
+                <AdminDashboard></AdminDashboard>
+              </AdminRoute>
+            ),
           },
-          { path: "/dashboard/all-users", element: <AllUser></AllUser> },
-          { path: "/dashboard/all-seller", element: <AllSeller></AllSeller> },
+          {
+            path: "/dashboard/all-users",
+            element: (
+              <AdminRoute>
+                <AllUser></AllUser>
+              </AdminRoute>
+            ),
+          },
+          {
+            path: "/dashboard/all-seller",
+            element: (
+              <AdminRoute>
+                <AllSeller></AllSeller>
+              </AdminRoute>
+            ),
+          },
           {
             path: "/dashboard/reported-items",
-            element: <ReportedItems></ReportedItems>,
+            element: (
+              <AdminRoute>
+                <ReportedItems></ReportedItems>,
+              </AdminRoute>
+            ),
           },
+          // seller only routes
           {
             path: "/dashboard/sellerDashboard",
-            element: <SellerDashboard></SellerDashboard>,
+            element: (
+              <SellerRoute>
+                <SellerDashboard></SellerDashboard>,
+              </SellerRoute>
+            ),
           },
           {
             path: "/dashboard/add-product",
-            element: <AddProduct></AddProduct>,
+            element: (
+              <SellerRoute>
+                <AddProduct></AddProduct>,
+              </SellerRoute>
+            ),
           },
-          { path: "/dashboard/my-buyers", element: <MyBuyers></MyBuyers> },
+          {
+            path: "/dashboard/my-buyers",
+            element: (
+              <SellerRoute>
+                <MyBuyers></MyBuyers>
+              </SellerRoute>
+            ),
+          },
 
           {
             path: "/dashboard/my-products",
-            element: <MyProducts></MyProducts>,
+            element: (
+              <SellerRoute>
+                <MyProducts></MyProducts>,
+              </SellerRoute>
+            ),
           },
-
+          // buyer only routes
           {
             path: "/dashboard/buyerDashboard",
-            element: <BuyerDashboard></BuyerDashboard>,
+            element: (
+              <BuyerRoute>
+                <BuyerDashboard></BuyerDashboard>,
+              </BuyerRoute>
+            ),
+          },
+          // {
+          //   path: "/dashboard/my-wishlist",
+          //   element: (
+          //     <BuyerRoute>
+          //       <MyWishlist></MyWishlist>,
+          //     </BuyerRoute>
+          //   ),
+          // },
+          {
+            path: "/dashboard/my-orders",
+            element: (
+              <BuyerRoute>
+                <MyOrders></MyOrders>
+              </BuyerRoute>
+            ),
           },
           {
-            path: "/dashboard/my-wishlist",
-            element: <MyWishlist></MyWishlist>,
+            path: "/dashboard/payment",
+            element: <Payment></Payment>,
           },
-          { path: "/dashboard/my-orders", element: <MyOrders></MyOrders> },
+          {
+            path: "/dashboard/payment-history",
+            element: <PaymentHistory></PaymentHistory>,
+          },
         ],
       },
       { path: "*", element: <ErrorPage></ErrorPage> },

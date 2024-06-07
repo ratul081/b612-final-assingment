@@ -2,7 +2,9 @@ import React from "react";
 import { CiHeart } from "react-icons/ci";
 import { TbTruckDelivery, TbTruckReturn } from "react-icons/tb";
 import { Link } from "react-router-dom";
-const ProductDetails = ({ productData }) => {
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+const ProductDetails = ({ productData, setProductDetails }) => {
+  const [axiosSecure] = useAxiosSecure();
   const {
     product_name,
     user_email,
@@ -15,6 +17,22 @@ const ProductDetails = ({ productData }) => {
     product_phoneNumber,
     product_postdate,
   } = productData;
+  console.table(productData);
+
+  const handleReportItem = (id) => {
+    axiosSecure.patch(`/product/report/${id}`).then((res) => {
+      //console.log(res.data);
+      if (res.data.data.modifiedCount > 0) {
+        Swal.fire({
+          icon: "success",
+          title: "Product added to report list",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+    });
+  };
+
   return (
     <div className="lg:space-y-4 space-y-1 md:space-y-2">
       <p className="text-2xl mt-4 font-semibold">{product_name}</p>
@@ -25,9 +43,19 @@ const ProductDetails = ({ productData }) => {
       <p>Posted on: {product_postdate}</p>
       <p>Contact Number: {product_phoneNumber}</p>
       <div className="flex gap-6">
-        <label htmlFor="booking-modal" className="btn btn-error text-white">
+        <label
+          htmlFor="booking-modal"
+          onClick={() => setProductDetails(productData)}
+          className="btn btn-error text-white">
           Book now
         </label>
+        <button
+          onClick={() => handleReportItem(productData._id)}
+          className={`btn btn-warning  ${
+            productData?.reported && "btn-disabled"
+          }`}>
+          Report
+        </button>
         <button>
           <CiHeart className="h-10 w-10" />
         </button>

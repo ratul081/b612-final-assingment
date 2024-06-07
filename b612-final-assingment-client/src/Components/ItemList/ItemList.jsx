@@ -1,8 +1,8 @@
 import React from "react";
 import Item from "./Item";
 
-const ItemList = ({ pageName, data: products }) => {
-  console.log("🚀 ~ ItemList ~ data:", products);
+const ItemList = ({ pageName, data: products, handleDelete }) => {
+  // //console.log("🚀 ~ ItemList ~ data:", products);
   return (
     <section>
       <div className="mx-auto lg:p-0 sm:px-6 sm:py-12">
@@ -14,7 +14,7 @@ const ItemList = ({ pageName, data: products }) => {
           </header>
           {products.length !== 0 &&
             products.map((product, idx) => (
-              <Item key={idx} data={product}></Item>
+              <Item key={idx} data={product} handleDelete={handleDelete}></Item>
             ))}
         </div>
       </div>

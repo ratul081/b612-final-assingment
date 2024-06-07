@@ -1,7 +1,8 @@
 import React from "react";
+import useCart from "../../hooks/useCart";
 
-const Item = ({ data }) => {
-  console.log(data);
+const Item = ({ data, handleDelete }) => {
+  const [, refetch] = useCart();
   const {
     product_name,
     product_category,
@@ -12,14 +13,16 @@ const Item = ({ data }) => {
     product_location,
     product_phoneNumber,
     product_postdate,
+    product_id,
   } = data;
+  // //console.log("🚀 ~ Item ~ data:", data);
   return (
     <div className="mt-8">
       <ul className="space-y-4">
         <li className="flex items-center gap-4">
           <img
             src={product_image}
-            alt=""
+            alt={product_name}
             className="h-20 w-20 rounded object-cover"
           />
           <div>
@@ -36,7 +39,9 @@ const Item = ({ data }) => {
             </dl>
           </div>
           <div className="flex flex-1 items-center justify-end gap-2">
-            <button className="text-gray-600 transition hover:text-red-600">
+            <button
+              onClick={() => handleDelete(data._id)}
+              className="text-gray-600 transition hover:text-red-600">
               <span className="sr-only">Remove item</span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"

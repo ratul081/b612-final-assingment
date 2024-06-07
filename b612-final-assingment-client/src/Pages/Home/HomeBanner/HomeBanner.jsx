@@ -1,6 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
+import "swiper/css";
+import "swiper/css/effect-fade";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import { EffectFade, Navigation, Pagination, Autoplay } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
 const HomeBanner = () => {
   return (
     <>
@@ -12,7 +17,7 @@ const HomeBanner = () => {
                 Best place to choose <br /> your{" "}
                 <span className="text-blue-500 ">Phones</span>
               </h1>
-              <p className="mt-3 text-gray-600 dark:text-gray-400">
+              <p className="my-3 text-gray-600 dark:text-gray-400">
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro
                 beatae error laborum ab amet sunt recusandae? Reiciendis natus
                 perspiciatis optio.
@@ -25,11 +30,26 @@ const HomeBanner = () => {
             </div>
           </div>
           <div className="flex items-center justify-center w-full mt-6 lg:mt-0 lg:w-1/2">
-            <img
-              className="w-full h-full lg:max-w-3xl"
-              src="https://merakiui.com/images/components/Catalogue-pana.svg"
-              alt="Catalogue-pana.svg"
-            />
+            <Swiper
+              spaceBetween={30}
+              centeredSlides={true}
+              autoplay={{
+                delay: 2500,
+                disableOnInteraction: false,
+              }}
+              pagination={{
+                clickable: true,
+              }}
+              navigation={true}
+              modules={[Autoplay, Pagination, Navigation]}
+              className="mySwiper">
+              <SwiperSlide>
+                <img src="https://i.ibb.co/QbncXgh/sileder-1.png" />
+              </SwiperSlide>
+              <SwiperSlide>
+                <img src="https://i.ibb.co/jDHMfbz/sileder-2.png" />
+              </SwiperSlide>
+            </Swiper>
           </div>
         </div>
       </div>

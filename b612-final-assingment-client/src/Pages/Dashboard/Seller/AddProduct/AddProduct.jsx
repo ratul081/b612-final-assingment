@@ -31,7 +31,7 @@ const AddProduct = () => {
       .then((imageUploadRes) => {
         if (imageUploadRes.data.success) {
           const imgURL = imageUploadRes.data.data.display_url;
-          console.log("🚀 ~ file: AddDoctors.jsx:26 ~ .then ~ imgURL:", imgURL);
+          //console.log("🚀 ~ file: AddDoctors.jsx:26 ~ .then ~ imgURL:", imgURL);
           const {
             name,
             category,
@@ -42,8 +42,9 @@ const AddProduct = () => {
             phoneNumber,
           } = data;
           const productDetails = {
+            seller_name: user?.email,
+            seller_email: user?.displayName,
             product_name: name,
-            product_email: user?.email,
             product_category: category,
             product_resale_price: price,
             product_image: imgURL,
@@ -53,11 +54,11 @@ const AddProduct = () => {
             product_phoneNumber: phoneNumber,
             product_postdate: formatDate(today, "dd-mm-yy"),
           };
-          console.log("🚀 ~ .then ~ productDetails:", productDetails);
+          //console.log("🚀 ~ .then ~ productDetails:", productDetails);
           axiosSecure
             .post("/add-product", productDetails)
             .then((res) => {
-              console.log(res.data);
+              //console.log(res.data);
               if (res.data.data.acknowledged) {
                 Swal.fire({
                   // position: "top-end",
@@ -66,9 +67,9 @@ const AddProduct = () => {
                   showConfirmButton: false,
                   timer: 1500,
                 });
-                navigate("/my-product");
+                navigate("/dashboard/my-products");
               } else {
-                console.log(res.data.data);
+                //console.log(res.data.data);
                 toast.error(res.data.data.message);
               }
             })
